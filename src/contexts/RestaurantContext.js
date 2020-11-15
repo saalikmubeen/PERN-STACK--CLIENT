@@ -34,7 +34,7 @@ export var RestaurantContext = createContext();
 export function RestaurantContextProvider(props){
      var [state, dispatch] = useReducer(restaurantReducer, defaultRestaurants);
     return (
-        <RestaurantContext.Provider value={state}>
+        <RestaurantContext.Provider value={{restaurants: state, dispatch}}>
             {props.children}
         </RestaurantContext.Provider>
     )

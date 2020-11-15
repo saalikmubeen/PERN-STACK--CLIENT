@@ -2,8 +2,7 @@ import React, {useContext} from 'react';
 import {RestaurantContext} from "../contexts/RestaurantContext";
 
 function RestaurantList() {
-     var restaurants = useContext(RestaurantContext);
-     console.log(restaurants)
+     var {restaurants} = useContext(RestaurantContext);
     return (
         <div className="list-group">
         <table className="table table-hover table-dark">
@@ -26,7 +25,7 @@ function RestaurantList() {
                     <td>{restaurant.name}</td>
                     <td>{restaurant.location}</td>
                     {/* <td>{"$".repeat(restaurant.price_range)}</td> */}
-                    <td>{restaurant.price_range}</td>
+                    <td>$ {restaurant.price_range}</td>
                     <td>
                       <button
                         className="btn btn-warning"

@@ -1,12 +1,31 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
+import {RestaurantContext} from "../contexts/RestaurantContext";
 
 function AddRestaurant() {
+  var [name, setName] = useState("");
+  var [location, setLocation] = useState("");
+  var [price, setPrice] = useState('');
+
+  var {dispatch} = useContext(RestaurantContext);
+
+  function handleSubmit(e){
+       e.preventDefault();
+
+       dispatch({
+         type: "ADD_RESTAURANT",
+         restaurant: {name, location, price_range: price}
+       })
+
+  }
+
+
   return (
     <div className="mb-4">
-    <form action="">
+    <form onSubmit={handleSubmit}>
       <div className="form-row">
         <div className="col">
           <input
+            onChange={(e) => setName(e.target.value)}
             type="text"
             className="form-control"
             placeholder="name"
@@ -14,22 +33,20 @@ function AddRestaurant() {
         </div>
         <div className="col">
           <input
+            onChange={(e) => setLocation(e.target.value)}
             className="form-control"
             type="text"
             placeholder="location"
           />
         </div>
         <div className="col">
-          <select
-            className="custom-select my-1 mr-sm-2"
-          >
-            <option disabled>Price Range</option>
-            <option value="1">$</option>
-            <option value="2">$$</option>
-            <option value="3">$$$</option>
-            <option value="4">$$$$</option>
-            <option value="5">$$$$$</option>
-          </select>
+        <input
+            onChange={(e) => setPrice(e.target.value)}
+            className="form-control"
+            type="number"
+            placeholder="price"
+            min="0"
+          />
         </div>
         <button
           type="submit"
