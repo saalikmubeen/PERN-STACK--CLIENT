@@ -1,8 +1,24 @@
 import React, {useContext} from 'react';
 import {RestaurantContext} from "../contexts/RestaurantContext";
+import {withRouter} from "react-router-dom";
 
-function RestaurantList() {
-     var {restaurants} = useContext(RestaurantContext);
+function RestaurantList(props) {
+     var {restaurants, dispatch} = useContext(RestaurantContext);
+
+     function handleDelete(e, id){
+        e.stopPropagation();
+        dispatch({
+          type: "DELETE_RESTAURANT",
+          id: id
+        })
+     }
+
+     function handleUpdate(e, id){
+        e.stopPropagation();
+        props.history.push(`/restaurants/${id}/update`)
+     }
+
+     console.log(props.history)
     return (
         <div className="list-group">
         <table className="table table-hover table-dark">
@@ -20,14 +36,15 @@ function RestaurantList() {
               restaurants.map((restaurant) => {
                 return (
                   <tr
+                    onClick={() => props.history.push(`/restaurants/${restaurant.id}`)}
                     key={restaurant.id}
                   >
                     <td>{restaurant.name}</td>
                     <td>{restaurant.location}</td>
-                    {/* <td>{"$".repeat(restaurant.price_range)}</td> */}
                     <td>$ {restaurant.price_range}</td>
                     <td>
                       <button
+                        onClick={(e) => handleUpdate(e, restaurant.id)}
                         className="btn btn-warning"
                       >
                         Update
@@ -35,6 +52,7 @@ function RestaurantList() {
                     </td>
                     <td>
                       <button
+                        onClick={(e) => handleDelete(e, restaurant.id)}
                         className="btn btn-danger"
                       >
                         Delete
@@ -43,34 +61,10 @@ function RestaurantList() {
                   </tr>
                 );
               })}
-            {/* <tr>
-              <td>mcdonalds</td>
-              <td>New YOrk</td>
-              <td>$$</td>
-              <td>Rating</td>
-              <td>
-                <button className="btn btn-warning">Update</button>
-              </td>
-              <td>
-                <button className="btn btn-danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>mcdonalds</td>
-              <td>New YOrk</td>
-              <td>$$</td>
-              <td>Rating</td>
-              <td>
-                <button className="btn btn-warning">Update</button>
-              </td>
-              <td>
-                <button className="btn btn-danger">Delete</button>
-              </td>
-            </tr> */}
           </tbody>
         </table>
       </div>
     )
 }
 
-export default RestaurantList;
+export default withRouter(RestaurantList);
