@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react';
+import {RestaurantContext} from "../contexts/RestaurantContext";
 
 function RestaurantList() {
+     var restaurants = useContext(RestaurantContext);
+     console.log(restaurants)
     return (
         <div className="list-group">
         <table className="table table-hover table-dark">
@@ -9,26 +12,23 @@ function RestaurantList() {
               <th scope="col">Restaurant</th>
               <th scope="col">Location</th>
               <th scope="col">Price Range</th>
-              <th scope="col">Ratings</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
-            {/* {restaurants &&
+            {restaurants &&
               restaurants.map((restaurant) => {
                 return (
                   <tr
-                    onClick={() => handleRestaurantSelect(restaurant.id)}
                     key={restaurant.id}
                   >
                     <td>{restaurant.name}</td>
                     <td>{restaurant.location}</td>
-                    <td>{"$".repeat(restaurant.price_range)}</td>
-                    <td>{renderRating(restaurant)}</td>
+                    {/* <td>{"$".repeat(restaurant.price_range)}</td> */}
+                    <td>{restaurant.price_range}</td>
                     <td>
                       <button
-                        onClick={(e) => handleUpdate(e, restaurant.id)}
                         className="btn btn-warning"
                       >
                         Update
@@ -36,7 +36,6 @@ function RestaurantList() {
                     </td>
                     <td>
                       <button
-                        onClick={(e) => handleDelete(e, restaurant.id)}
                         className="btn btn-danger"
                       >
                         Delete
@@ -44,8 +43,8 @@ function RestaurantList() {
                     </td>
                   </tr>
                 );
-              })} */}
-            <tr>
+              })}
+            {/* <tr>
               <td>mcdonalds</td>
               <td>New YOrk</td>
               <td>$$</td>
@@ -68,7 +67,7 @@ function RestaurantList() {
               <td>
                 <button className="btn btn-danger">Delete</button>
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>
