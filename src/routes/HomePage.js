@@ -1,9 +1,14 @@
 import React from 'react';
+import Header from "../components/Header";
+import AddRestaurant from "../components/AddRestaurant";
+import RestaurantList from "../components/RestaurantList";
 
 function HomePage() {
   return (
-    <div>
-        Home page
+    <div className="container">
+         <Header/>
+         <AddRestaurant/>
+         <RestaurantList/>
     </div>
   );
 }
