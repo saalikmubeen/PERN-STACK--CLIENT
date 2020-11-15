@@ -1,5 +1,6 @@
-import React, {createContext, useReducer} from "react";
+import React, {createContext, useReducer, useEffect} from "react";
 import restaurantReducer from "../reducers/restaurantReducer";
+import Restaurant from "../apis/restaurant";
 
 
 var defaultRestaurants = [
@@ -20,12 +21,6 @@ var defaultRestaurants = [
         "name": "kfc",
         "location": "los angeles",
         "price_range": 95
-    },
-    {
-        "id": "7",
-        "name": "amigos",
-        "location": "dargah",
-        "price_range": 73
     }
 ]
 
@@ -33,6 +28,20 @@ export var RestaurantContext = createContext();
 
 export function RestaurantContextProvider(props){
      var [state, dispatch] = useReducer(restaurantReducer, defaultRestaurants);
+
+     useEffect(() => {
+        async function fetchRestaurants(){
+            var res = await Restaurant.get("/");
+            dispatch({
+                type: "SET_RESTAURANTS",
+                restaurants: res.data.data.restaurants
+            })
+        }
+
+        fetchRestaurants(); 
+
+     }, [])
+
     return (
         <RestaurantContext.Provider value={{restaurants: state, dispatch}}>
             {props.children}

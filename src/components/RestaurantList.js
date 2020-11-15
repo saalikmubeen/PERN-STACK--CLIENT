@@ -1,12 +1,16 @@
 import React, {useContext} from 'react';
-import {RestaurantContext} from "../contexts/RestaurantContext";
 import {withRouter} from "react-router-dom";
+import {RestaurantContext} from "../contexts/RestaurantContext";
+import Restaurant from "../apis/restaurant";
 
 function RestaurantList(props) {
      var {restaurants, dispatch} = useContext(RestaurantContext);
 
-     function handleDelete(e, id){
+     async function handleDelete(e, id){
         e.stopPropagation();
+         
+        await Restaurant.delete(`/${id}`);
+
         dispatch({
           type: "DELETE_RESTAURANT",
           id: id
@@ -18,7 +22,6 @@ function RestaurantList(props) {
         props.history.push(`/restaurants/${id}/update`)
      }
 
-     console.log(props.history)
     return (
         <div className="list-group">
         <table className="table table-hover table-dark">

@@ -1,5 +1,7 @@
 function restaurantReducer(state, action){
     switch(action.type){
+        case "SET_RESTAURANTS":
+            return [...action.restaurants]
         case "ADD_RESTAURANT":
             return [...state, action.restaurant];
         case "UPDATE_RESTAURANT":
