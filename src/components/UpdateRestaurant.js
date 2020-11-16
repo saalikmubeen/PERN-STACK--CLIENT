@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {RestaurantContext} from "../contexts/RestaurantContext";
 import {withRouter} from "react-router-dom";
+import Restaurant from "../apis/restaurant";
 
 function UpdateRestaurant(props) {
   var {restaurants, dispatch} = useContext(RestaurantContext);
@@ -11,11 +12,15 @@ function UpdateRestaurant(props) {
   var [price, setPrice] = useState(restaurant.price_range);
 
 
-  function handleSubmit(){
+  async function handleSubmit(e){
+    e.preventDefault();
+
+    var res = await Restaurant.put(`/${restaurant.id}`, {name, location, price_range: price});
+
      dispatch({
        type: "UPDATE_RESTAURANT",
        id: restaurant.id,
-       restaurantUpdates: {name, location, price_range: price}
+       restaurantUpdates: {...res.data.data.restaurants}
      })
 
      props.history.push("/");

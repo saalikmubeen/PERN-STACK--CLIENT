@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {RestaurantContext} from "../contexts/RestaurantContext";
+import Restaurant from "../apis/restaurant";
 
 function AddRestaurant() {
   var [name, setName] = useState("");
@@ -8,12 +9,14 @@ function AddRestaurant() {
 
   var {dispatch} = useContext(RestaurantContext);
 
-  function handleSubmit(e){
+  async function handleSubmit(e){
        e.preventDefault();
+
+       var res = await Restaurant.post("/", {name, location, price_range: price});
 
        dispatch({
          type: "ADD_RESTAURANT",
-         restaurant: {name, location, price_range: price}
+         restaurant: {...res.data.data.restaurants}
        })
 
   }
