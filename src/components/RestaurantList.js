@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {withRouter} from "react-router-dom";
 import {RestaurantContext} from "../contexts/RestaurantContext";
 import Restaurant from "../apis/restaurant";
+import RatingStar from "../components/RatingStar";
 
 function RestaurantList(props) {
      var {restaurants, dispatch} = useContext(RestaurantContext);
@@ -30,6 +31,7 @@ function RestaurantList(props) {
               <th scope="col">Restaurant</th>
               <th scope="col">Location</th>
               <th scope="col">Price Range</th>
+              <th scope="col">Ratings</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
             </tr>
@@ -45,6 +47,7 @@ function RestaurantList(props) {
                     <td>{restaurant.name}</td>
                     <td>{restaurant.location}</td>
                     <td>$ {restaurant.price_range}</td>
+                    <td><RatingStar rating={restaurant.avg_rating}/></td>
                     <td>
                       <button
                         onClick={(e) => handleUpdate(e, restaurant.id)}
