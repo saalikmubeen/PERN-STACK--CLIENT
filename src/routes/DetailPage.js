@@ -1,9 +1,12 @@
 import React from 'react';
+import Review from "../components/Review";
+import AddReview from "../components/AddReview";
 
 function DetailPage() {
   return (
-    <div>
-        Detail Page
+    <div className="container">
+        <Review/>
+        <AddReview/>
     </div>
   );
 }
