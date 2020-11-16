@@ -47,7 +47,10 @@ function RestaurantList(props) {
                     <td>{restaurant.name}</td>
                     <td>{restaurant.location}</td>
                     <td>$ {restaurant.price_range}</td>
-                    <td><RatingStar rating={restaurant.avg_rating}/></td>
+                    <td> 
+                      <RatingStar rating={restaurant.avg_rating}/>
+                      <span className="ml-1 text-warning">({restaurant.ratings || 0})</span>
+                    </td>
                     <td>
                       <button
                         onClick={(e) => handleUpdate(e, restaurant.id)}

@@ -1,10 +1,10 @@
 import React from 'react'
 import RatingStar from "./RatingStar";
 
-function Review() {
+function Review(props) {
     return (
         <div className="row row-cols-3 mb-2">
-      {/* {reviews.map((review) => {
+      {props.reviews.map((review) => {
         return (
           <div
             key={review.id}
@@ -12,9 +12,9 @@ function Review() {
             style={{ maxWidth: "30%" }}
           >
             <div className="card-header d-flex justify-content-between">
-              <span>{review.name}</span>
+              <span>{review.author}</span>
               <span>
-                <StarRating rating={review.rating} />
+                <RatingStar rating={review.rating} />
               </span>
             </div>
             <div className="card-body">
@@ -22,63 +22,7 @@ function Review() {
             </div>
           </div>
         );
-      })} */}
-      <div
-        className="card text-white bg-primary mb-3 mr-4"
-        style={{ maxWidth: "30%" }}
-      >
-        <div className="card-header d-flex justify-content-between">
-          <span>Joan</span>
-          <span>
-            <RatingStar rating={3} />
-          </span>
-        </div>
-        <div className="card-body">
-          <p className="card-text">This restaurant was awesome</p>
-        </div>
-      </div>
-      <div
-        className="card text-white bg-primary mb-3 mr-4"
-        style={{ maxWidth: "30%" }}
-      >
-        <div className="card-header d-flex justify-content-between">
-          <span>Joan</span>
-          <span>
-            <RatingStar rating={3} />
-          </span>
-        </div>
-        <div className="card-body">
-          <p className="card-text">This restaurant was awesome</p>
-        </div>
-      </div>
-      <div
-        className="card text-white bg-primary mb-3 mr-4"
-        style={{ maxWidth: "30%" }}
-      >
-        <div className="card-header d-flex justify-content-between">
-          <span>Joan</span>
-          <span>
-            <RatingStar rating={3} />
-          </span>
-        </div>
-        <div className="card-body">
-          <p className="card-text">This restaurant was awesome</p>
-        </div>
-      </div>
-      <div
-        className="card text-white bg-primary mb-3 mr-4"
-        style={{ maxWidth: "30%" }}
-      >
-        <div className="card-header d-flex justify-content-between">
-          <span>Joan</span>
-          <span>
-            <RatingStar rating={3} />
-          </span>
-        </div>
-        <div className="card-body">
-          <p className="card-text">This restaurant was awesome</p>
-        </div>
-      </div>
+      })}
     </div>
     )
 };
